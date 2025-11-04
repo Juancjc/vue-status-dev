@@ -1,8 +1,8 @@
-# Vite Vue Starter
+# vue-status-dev
 
-This is a project template using [Vite](https://vitejs.dev/). It requires [Node.js](https://nodejs.org) version 18+ or 20+.
+Um componente Vue para exibir o status de desenvolvimento de uma página ou sistema.
 
-To start:
+Para começar:
 
 ```sh
 npm install
@@ -16,3 +16,29 @@ yarn dev
 pnpm install
 pnpm run dev
 ```
+
+## Sobre
+
+Este projeto fornece um badge/component para indicar visualmente que determinada página, funcionalidade ou sistema está em desenvolvimento. Ideal para times de desenvolvimento, homologação ou ambientes de staging.
+
+## Exemplo de uso
+
+```vue
+<template>
+  <StatusBadge status="Em desenvolvimento" />
+</template>
+```
+
+## Funcionalidades
+
+- Badge de status customizável
+- Fácil integração em projetos Vue
+- Visual moderno
+
+## Licença
+
+MIT
+
+---
+
+> Feito para facilitar a comunicação visual do status de desenvolvimento em projetos Vue.

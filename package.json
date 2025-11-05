@@ -8,6 +8,8 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "bootstrap-icons": "^1.13.1",
     "vue": "latest"
   },
   "devDependencies": {

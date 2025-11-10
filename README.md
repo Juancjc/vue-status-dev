@@ -21,13 +21,34 @@ pnpm run dev
 
 Este projeto fornece um badge/component para indicar visualmente que determinada página, funcionalidade ou sistema está em desenvolvimento. Ideal para times de desenvolvimento, homologação ou ambientes de staging.
 
-## Exemplo de uso
+## Instalação via NPM
+
+Para instalar o componente em seu projeto Vue 3:
+
+```sh
+npm install vue-status-badge
+```
+
+## Como usar
+
+Importe e utilize o componente no seu projeto:
 
 ```vue
 <template>
-  <StatusBadge status="Em desenvolvimento" />
+  <StatusBadge status="desenvolvimento" size="44" />
 </template>
+
+<script setup>
+import StatusBadge from "vue-status-badge/StatusBadge.vue";
+</script>
 ```
+
+### Props disponíveis
+
+- `status`: string (ex: `finalizado`, `desenvolvimento`, `finalizando`, `aguardando_aprovacao`, `em_pausa`, `cancelado`)
+- `size`: número (tamanho do badge em px)
+
+> **Nota:** O pacote depende do `@fortawesome/fontawesome-free` para os ícones. Certifique-se de instalar essa dependência.
 
 ## Funcionalidades
 

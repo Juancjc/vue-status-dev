@@ -1,12 +1,16 @@
 <template>
-  <span class="status-badge" :style="styleVars" :title="label">
-    <i :class="iconClass" aria-hidden="true"></i>
-  </span>
+  <div class="status-wrapper" :style="styleVars" :title="label">
+    <span class="status-badge">
+      <i :class="iconClass" aria-hidden="true"></i>
+    </span>
+    <p class="status-label-mobile">{{ label }}</p>
+  </div>
 </template>
 
 <script setup>
 import { computed } from "vue";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+
 const props = defineProps({
   status: { type: String, default: "finalizado" },
   size: { type: Number, default: 44 },
@@ -18,11 +22,7 @@ const statusMap = {
     color: "#dc3333",
     label: "Em Desenvolvimento",
   },
-  finalizando: {
-    icon: "fas fa-tools",
-    color: "#F59E0B",
-    label: "Finalizando",
-  },
+  finalizando: { icon: "fas fa-tools", color: "#F59E0B", label: "Finalizando" },
   aguardando_aprovacao: {
     icon: "fas fa-hourglass-half",
     color: "#F59E0B",
@@ -57,6 +57,19 @@ const label = computed(() => current.value.label);
 </script>
 
 <style scoped>
+/* Wrapper prende os dois (badge + label) e centraliza */
+.status-wrapper {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 6px; /* espaço entre badge e label */
+  z-index: 9999;
+}
+
+/* Badge */
 .status-badge {
   width: var(--size);
   height: var(--size);
@@ -67,12 +80,39 @@ const label = computed(() => current.value.label);
   background: var(--status-color);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25), 0 0 14px rgba(0, 0, 0, 0.18),
     inset 0 0 6px rgba(255, 255, 255, 0.35);
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease;
   animation: pulse 1.2s infinite;
-  z-index: 9999;
-  position: fixed;
-  top: 16px;
-  left: 50%;
+}
+
+.status-badge i {
+  font-size: calc(var(--size) * 0.6);
+  color: #fff;
+}
+
+.status-badge:hover {
+  transform: scale(1.12);
+}
+
+/* Label: escondido por padrão (desktop), aparece só no mobile */
+.status-label-mobile {
+  display: none;
+  background-color: aliceblue;
+  border-radius: 12px;
+  text-align: center;
+  padding: 1px 8px;
+  font-size: 0.75rem;
+  color: #333;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Mostra no mobile */
+@media (max-width: 768px) {
+  .status-label-mobile {
+    display: inline-block;
+  }
 }
 
 @keyframes pulse {
@@ -88,14 +128,5 @@ const label = computed(() => current.value.label);
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.25), 0 0 14px rgba(0, 0, 0, 0.18),
       inset 0 0 6px rgba(255, 255, 255, 0.35), 0 0 0 0 rgba(7, 150, 55, 0);
   }
-}
-
-.status-badge i {
-  font-size: calc(var(--size) * 0.6);
-  color: #fff;
-}
-
-.status-badge:hover {
-  transform: scale(1.12);
 }
 </style>

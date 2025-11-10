@@ -1,6 +1,6 @@
 {
   "name": "vue-status-badge",
-  "version": "0.0.6",
+  "version": "0.0.5",
   "description": "Componente Vue para exibir status com ícone animado usando Font Awesome.",
   "main": "StatusBadge.vue",
   "keywords": ["vue", "badge", "status", "icon", "fontawesome"],

@@ -14,6 +14,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 const props = defineProps({
   status: { type: String, default: "finalizado" },
   size: { type: Number, default: 44 },
+  position: { type: String, default: "middle-top" }, // left-top, middle-top, right-top
 });
 
 const statusMap = {
@@ -47,10 +48,80 @@ const statusMap = {
 
 const current = computed(() => statusMap[props.status] ?? statusMap.finalizado);
 
-const styleVars = computed(() => ({
-  "--size": `${props.size}px`,
-  "--status-color": current.value.color,
-}));
+const positionStyles = {
+  "left-top": {
+    top: "16px",
+    left: "16px",
+    right: "auto",
+    bottom: "auto",
+    transform: "none",
+  },
+  "middle-top": {
+    top: "16px",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    transform: "translateX(-50%)",
+  },
+  "right-top": {
+    top: "16px",
+    left: "auto",
+    right: "16px",
+    bottom: "auto",
+    transform: "none",
+  },
+  "left-center": {
+    top: "50%",
+    left: "16px",
+    right: "auto",
+    bottom: "auto",
+    transform: "translateY(-50%)",
+  },
+  "middle-center": {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    transform: "translate(-50%, -50%)",
+  },
+  "right-center": {
+    top: "50%",
+    left: "auto",
+    right: "16px",
+    bottom: "auto",
+    transform: "translateY(-50%)",
+  },
+  "left-bottom": {
+    top: "auto",
+    left: "16px",
+    right: "auto",
+    bottom: "16px",
+    transform: "none",
+  },
+  "middle-bottom": {
+    top: "auto",
+    left: "50%",
+    right: "auto",
+    bottom: "16px",
+    transform: "translateX(-50%)",
+  },
+  "right-bottom": {
+    top: "auto",
+    left: "auto",
+    right: "16px",
+    bottom: "16px",
+    transform: "none",
+  },
+};
+
+const styleVars = computed(() => {
+  const base = {
+    "--size": `${props.size}px`,
+    "--status-color": current.value.color,
+  };
+  const pos = positionStyles[props.position] || positionStyles["middle-top"];
+  return { ...base, ...pos };
+});
 
 const iconClass = computed(() => current.value.icon);
 const label = computed(() => current.value.label);
@@ -60,9 +131,7 @@ const label = computed(() => current.value.label);
 /* Wrapper prende os dois (badge + label) e centraliza */
 .status-wrapper {
   position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* top, left, right, transform agora são dinâmicos via styleVars */
   display: grid;
   justify-items: center;
   gap: 6px; /* espaço entre badge e label */

@@ -35,7 +35,8 @@ Importe e utilize o componente no seu projeto:
 
 ```vue
 <template>
-  <StatusBadge status="desenvolvimento" size="44" />
+  <!-- Exemplo com posição customizada -->
+  <StatusBadge status="desenvolvimento" :size="44" position="right-bottom" />
 </template>
 
 <script setup>
@@ -47,6 +48,18 @@ import StatusBadge from "vue-status-badge/StatusBadge.vue";
 
 - `status`: string (ex: `finalizado`, `desenvolvimento`, `finalizando`, `aguardando_aprovacao`, `em_pausa`, `cancelado`)
 - `size`: número (tamanho do badge em px)
+- `position`: string (define a posição do badge na tela)
+  - Opções:
+    - `left-top`
+    - `middle-top`
+    - `right-top`
+    - `left-center`
+    - `middle-center`
+    - `right-center`
+    - `left-bottom`
+    - `middle-bottom`
+    - `right-bottom`
+  - Exemplo: `<StatusBadge position="middle-center" />`
 
 > **Nota:** O pacote depende do `@fortawesome/fontawesome-free` para os ícones. Certifique-se de instalar essa dependência.
 

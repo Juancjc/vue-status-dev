@@ -41,6 +41,7 @@ Importe e utilize o componente no seu projeto:
 
 <script setup>
 import StatusBadge from "vue-status-badge/StatusBadge.vue";
+// No repositório de desenvolvimento, o Playground usa exatamente este mesmo arquivo.
 </script>
 ```
 
@@ -76,3 +77,9 @@ MIT
 ---
 
 > Feito para facilitar a comunicação visual do status de desenvolvimento em projetos Vue.
+
+
+## Playground local
+
+O Playground fica em `src/App.vue` e importa o componente direto de `status-badge/StatusBadge.vue`.
+Assim, qualquer alteração visual/comportamental é feita em um único lugar antes de publicar no npm.
